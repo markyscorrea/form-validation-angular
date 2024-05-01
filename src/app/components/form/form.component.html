@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="h4 pb-2 mb-4 border-bottom border-secondary">
+        Formulário de Cadastro
+    </div>
+
+    <form [formGroup]="form" class="row g-3">
+        <div class="d-flex justify-content-start">
+            <h6>Dados Pessoais:</h6>
+        </div>
+        <!-- NOME -->
+        <div class="col-md-6">
+            <input placeholder="Nome" formControlName="nome" type="text" class="form-control">
+            @if (form.controls.nome.invalid && form.controls.nome.touched) {
+            <app-msg-validation [campo]="'Nome'"></app-msg-validation>
+            }
+        </div>
+        <!-- SOBRENOME -->
+        <div class="col-md-6">
+            <input placeholder="Sobrenome" formControlName="sobrenome" type="text" class="form-control">
+            @if (form.controls.sobrenome.invalid && form.controls.sobrenome.touched) {
+            <app-msg-validation [campo]="'Sobrenome'"></app-msg-validation>
+            }
+        </div>
+        <!-- E-MAIL -->
+        <div class="col-md-6">
+            <input placeholder="E-mail" type="text" class="form-control" id="email" value="" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <!-- GÊNERO -->
+        <div class="col-md-6">
+            <select class="form-select" id="genero" required>
+                <option selected disabled value="">Gênero</option>
+                <option> Masculino </option>
+                <option> Feminino </option>
+                <option> Não Binário </option>
+                <option> Outro </option>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid state.
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-start">
+            <h6>Endereço:</h6>
+        </div>
+        <!-- CEP -->
+        <div class="col-md-4">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="cep" placeholder="CEP" aria-label="CEP"
+                    aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary " type="button" id="button-addon2">
+                    <!-- Ícone de lupa (Bootstrap Icons) -->
+                    <i class="bi bi-search" data-bs-toggle="tooltip" [ngbTooltip]="'Pesquisar'"></i>
+                </button>
+            </div>
+        </div>
+        <!-- LOGRADOURO -->
+        <div class="col-md-8">
+            <input placeholder="Rua/Avenida" type="text" class="form-control" id="logradouro" value="" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <!-- BAIRRO -->
+        <div class="col-md-6">
+            <input placeholder="Bairro" type="text" class="form-control" id="bairro" value="" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <!-- CIDADE -->
+        <div class="col-md-6">
+            <input placeholder="Cidade" type="text" class="form-control" id="logradouro" value="" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <!-- COMPLEMENTO -->
+        <div class="col-md-8">
+            <input placeholder="Complemento" type="text" class="form-control" id="complemento" value="">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <!-- UF -->
+        <div class="col-md-4">
+            <input placeholder="UF" type="text" class="form-control" id="uf" value="" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+
+        @if (alertFields) {
+        <div class="alert alert-danger" role="alert">
+            Por favor, preencha todos os campos obrigatórios!
+        </div>
+        }
+
+        <div class="col-12">
+            <button [disabled]="form.invalid" (click)="validarCampos()" class="btn btn-primary w-100"
+                type="submit">Cadastrar</button>
+        </div>
+    </form>
+</div>

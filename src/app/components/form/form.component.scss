@@ -1,0 +1,9 @@
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid #dc3545;
+}
+
+.campoInvalido {
+    width: 100%;
+    font-size: 0.8rem;
+    color: #dc3545;
+}
