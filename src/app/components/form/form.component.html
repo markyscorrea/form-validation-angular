@@ -23,23 +23,23 @@
         </div>
         <!-- E-MAIL -->
         <div class="col-md-6">
-            <input placeholder="E-mail" type="text" class="form-control" id="email" value="" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input placeholder="E-mail" formControlName="email" type="text" class="form-control">
+            @if (form.controls.email.invalid && form.controls.email.touched) {
+            <app-msg-validation [campo]="'E-mail'"></app-msg-validation>
+            }
         </div>
         <!-- GÊNERO -->
         <div class="col-md-6">
-            <select class="form-select" id="genero" required>
+            <select class="form-select" formControlName="genero">
                 <option selected disabled value="">Gênero</option>
-                <option> Masculino </option>
-                <option> Feminino </option>
-                <option> Não Binário </option>
-                <option> Outro </option>
+                <option value="masculino"> Masculino </option>
+                <option value="feminino"> Feminino </option>
+                <option value="nao-binario"> Não Binário </option>
+                <option value="outro"> Outro </option>
             </select>
-            <div class="invalid-feedback">
-                Please select a valid state.
-            </div>
+            @if (form.controls.genero.invalid && form.controls.genero.touched) {
+            <app-msg-validation [campo]="'Gênero'"></app-msg-validation>
+            }
         </div>
 
         <div class="d-flex justify-content-start">
@@ -48,41 +48,40 @@
         <!-- CEP -->
         <div class="col-md-4">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="cep" placeholder="CEP" aria-label="CEP"
-                    aria-describedby="button-addon2">
+                <input appApenasNumeros (keydown)="onKeyDown($event)" placeholder="CEP" formControlName="cep" type="text" class="form-control">
                 <button class="btn btn-outline-primary " type="button" id="button-addon2">
                     <!-- Ícone de lupa (Bootstrap Icons) -->
                     <i class="bi bi-search" data-bs-toggle="tooltip" [ngbTooltip]="'Pesquisar'"></i>
                 </button>
             </div>
+            @if (form.controls.cep.invalid && form.controls.cep.touched) {
+            <app-msg-validation [campo]="'CEP'"></app-msg-validation>
+            }
         </div>
         <!-- LOGRADOURO -->
         <div class="col-md-8">
-            <input placeholder="Rua/Avenida" type="text" class="form-control" id="logradouro" value="" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input placeholder="Rua/Avenida" type="text" class="form-control" formControlName="logradouro">
+            @if (form.controls.logradouro.invalid && form.controls.logradouro.touched) {
+            <app-msg-validation [campo]="'Rua/Avenida'"></app-msg-validation>
+            }
         </div>
         <!-- BAIRRO -->
         <div class="col-md-6">
-            <input placeholder="Bairro" type="text" class="form-control" id="bairro" value="" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input placeholder="Bairro" type="text" class="form-control" formControlName="bairro">
+            @if (form.controls.bairro.invalid && form.controls.bairro.touched) {
+            <app-msg-validation [campo]="'Bairro'"></app-msg-validation>
+            }
         </div>
         <!-- CIDADE -->
         <div class="col-md-6">
-            <input placeholder="Cidade" type="text" class="form-control" id="logradouro" value="" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input placeholder="Cidade" type="text" class="form-control" id="logradouro" formControlName="cidade">
+            @if (form.controls.cidade.invalid && form.controls.cidade.touched) {
+            <app-msg-validation [campo]="'Cidade'"></app-msg-validation>
+            }
         </div>
         <!-- COMPLEMENTO -->
         <div class="col-md-8">
-            <input placeholder="Complemento" type="text" class="form-control" id="complemento" value="">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input placeholder="Complemento (Opcional)" type="text" class="form-control" formControlName="complemento">
         </div>
         <!-- UF -->
         <div class="col-md-4">
@@ -99,8 +98,8 @@
         }
 
         <div class="col-12">
-            <button [disabled]="form.invalid" (click)="validarCampos()" class="btn btn-primary w-100"
-                type="submit">Cadastrar</button>
+            <!-- [disabled]="form.invalid" -->
+            <button (click)="validarCampos()" class="btn btn-primary w-100" type="submit">Cadastrar</button>
         </div>
     </form>
 </div>
