@@ -93,15 +93,9 @@
                 }
             </select>
             @if (form.controls.uf.invalid && form.controls.uf.touched) {
-                <app-msg-validation [campo]="'Estado'"></app-msg-validation>
-                }
+            <app-msg-validation [campo]="'Estado'"></app-msg-validation>
+            }
         </div>
-
-        @if (alertFields) {
-        <div class="alert alert-danger" role="alert">
-            Por favor, preencha todos os campos obrigatórios!
-        </div>
-        }
 
         <div class="col-12">
             <button (click)="validarCampos()" class="btn btn-primary w-100" type="submit">Cadastrar</button>

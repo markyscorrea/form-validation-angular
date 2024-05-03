@@ -27,7 +27,6 @@ import { Endereco } from '../../interface/endereco.interface';
 })
 export class FormComponent {
 
-  alertFields: boolean = false;
   estados$ = new Observable<EstadoBr[]>();
 
   private formBuilderService = inject(FormBuilder);
