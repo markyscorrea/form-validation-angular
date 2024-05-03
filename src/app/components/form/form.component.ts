@@ -4,6 +4,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
 import { MsgValidationComponent } from '../msg-validation/msg-validation.component';
 import { ApenasNumerosDirective } from '../../diretivas/apenas-numeros.directive';
+import { DropdownService } from '../../servicos/dropdown.service';
+import { EstadoBr } from '../../interface/estado-br.interface';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { ConsultaCepService } from '../../servicos/consulta-cep.service';
+import { Endereco } from '../../interface/endereco.interface';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +19,8 @@ import { ApenasNumerosDirective } from '../../diretivas/apenas-numeros.directive
     NgbModule,
     FormDebugComponent,
     MsgValidationComponent,
-    ApenasNumerosDirective
+    ApenasNumerosDirective,
+    AsyncPipe
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
@@ -21,8 +28,11 @@ import { ApenasNumerosDirective } from '../../diretivas/apenas-numeros.directive
 export class FormComponent {
 
   alertFields: boolean = false;
+  estados$ = new Observable<EstadoBr[]>();
 
   private formBuilderService = inject(FormBuilder);
+  private dropDownService = inject(DropdownService);
+  private consultaCep = inject(ConsultaCepService);
 
   protected form = this.formBuilderService.group({
     nome: ['', Validators.required],
@@ -33,8 +43,13 @@ export class FormComponent {
     logradouro: ['', Validators.required],
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
-    complemento: ['']
+    complemento: [''],
+    uf: ['', [Validators.required]]
   })
+
+  ngOnInit() {
+    this.estados$ = this.dropDownService.getEstados();
+  }
 
   onKeyDown(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
@@ -45,7 +60,20 @@ export class FormComponent {
     }
   }
 
+  buscarCep() {
+    this.consultaCep.buscar(this.form.value.cep)
+      .subscribe((cep: Endereco) => {
+        this.form.patchValue({
+          logradouro: cep.logradouro,
+          bairro: cep.bairro,
+          cidade: cep. localidade,
+          uf: cep.uf
+        })
+      });
+  }
+
   validarCampos() {
+
     if (this.form.valid) {
       console.log('formulário válido')
     } else {
@@ -54,10 +82,5 @@ export class FormComponent {
         controle?.markAsTouched();
       })
     }
-
-    // this.form.patchValue({
-    //   nome: 'Markys',
-    //   sobrenome: 'Corrêa'
-    // })
   }
 }

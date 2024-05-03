@@ -48,8 +48,9 @@
         <!-- CEP -->
         <div class="col-md-4">
             <div class="input-group mb-3">
-                <input appApenasNumeros (keydown)="onKeyDown($event)" placeholder="CEP" formControlName="cep" type="text" class="form-control">
-                <button class="btn btn-outline-primary " type="button" id="button-addon2">
+                <input appApenasNumeros (keydown)="onKeyDown($event)" placeholder="CEP" formControlName="cep"
+                    type="text" class="form-control">
+                <button (click)="buscarCep()" class="btn btn-outline-primary " type="button" id="button-addon2">
                     <!-- Ícone de lupa (Bootstrap Icons) -->
                     <i class="bi bi-search" data-bs-toggle="tooltip" [ngbTooltip]="'Pesquisar'"></i>
                 </button>
@@ -85,10 +86,15 @@
         </div>
         <!-- UF -->
         <div class="col-md-4">
-            <input placeholder="UF" type="text" class="form-control" id="uf" value="" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <select class="form-select" formControlName="uf">
+                <option selected disabled value="">UF</option>
+                @for (estado of estados$ | async; track $index) {
+                <option> {{ estado.sigla }} </option>
+                }
+            </select>
+            @if (form.controls.uf.invalid && form.controls.uf.touched) {
+                <app-msg-validation [campo]="'Estado'"></app-msg-validation>
+                }
         </div>
 
         @if (alertFields) {
@@ -98,7 +104,6 @@
         }
 
         <div class="col-12">
-            <!-- [disabled]="form.invalid" -->
             <button (click)="validarCampos()" class="btn btn-primary w-100" type="submit">Cadastrar</button>
         </div>
     </form>
