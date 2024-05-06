@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ConsultaCepService } from '../../servicos/consulta-cep.service';
 import { Endereco } from '../../interface/endereco.interface';
+import { PessoaService } from '../../servicos/pessoa.service';
+import { Pessoa } from '../../interface/pessoa.interface';
 
 @Component({
   selector: 'app-form',
@@ -32,6 +34,7 @@ export class FormComponent {
   private formBuilderService = inject(FormBuilder);
   private dropDownService = inject(DropdownService);
   private consultaCep = inject(ConsultaCepService);
+  private pessoaService = inject(PessoaService);
 
   protected form = this.formBuilderService.group({
     nome: ['', Validators.required],
@@ -75,8 +78,11 @@ export class FormComponent {
   validarCampos() {
 
     if (this.form.valid) {
-      console.log('formulário válido')
-      console.log(this.form.value);
+      const pessoa = this.form.value as Pessoa;
+      this.pessoaService.cadastrar(pessoa).subscribe(p => {
+        console.log(p);
+        this.form.reset();
+      })
     } else {
       Object.keys(this.form.controls).forEach(campo => {
         const controle = this.form.get(campo);

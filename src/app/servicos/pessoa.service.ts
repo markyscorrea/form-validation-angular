@@ -8,11 +8,11 @@ import { environment } from '../../environments/environment.development';
 })
 export class PessoaService {
 
-  private url = `${environment}/pessoas`;
+  private url = `${environment.api}/pessoas`;
 
   constructor(private http: HttpClient) { }
 
   cadastrar(pessoa: Pessoa){
-
+    return this.http.post<Pessoa>(this.url, pessoa);
   }
 }
