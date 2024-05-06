@@ -75,17 +75,24 @@
         </div>
         <!-- CIDADE -->
         <div class="col-md-6">
-            <input placeholder="Cidade" type="text" class="form-control" id="logradouro" formControlName="cidade">
+            <input placeholder="Cidade" type="text" class="form-control" formControlName="cidade">
             @if (form.controls.cidade.invalid && form.controls.cidade.touched) {
             <app-msg-validation [campo]="'Cidade'"></app-msg-validation>
             }
         </div>
         <!-- COMPLEMENTO -->
-        <div class="col-md-8">
+        <div class="col-md-6">
             <input placeholder="Complemento (Opcional)" type="text" class="form-control" formControlName="complemento">
         </div>
+        <!-- NÚMERO -->
+        <div class="col-md-3">
+            <input placeholder="Nº" type="text" class="form-control" formControlName="numero">
+            @if (form.controls.numero.invalid && form.controls.numero.touched) {
+            <app-msg-validation [campo]="'Número'"></app-msg-validation>
+            }
+        </div>
         <!-- UF -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <select class="form-select" formControlName="uf">
                 <option selected disabled value="">UF</option>
                 @for (estado of estados$ | async; track $index) {

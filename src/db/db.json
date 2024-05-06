@@ -1,3 +1,17 @@
 {
-    "pessoas": []
+    "pessoas": [
+        {
+            "nome": "Márkys",
+            "sobrenome": "Corrêa",
+            "email": "markyscorrea@gmail.com",
+            "genero": "masculino",
+            "cep": "72915710",
+            "logradouro": "Alameda Varsóvia",
+            "numero": "51",
+            "bairro": "Mansões Centro Oeste",
+            "cidade": "Águas Lindas de Goiás",
+            "complemento": "Condomínio Porto Nobre XVIII",
+            "uf": "GO"
+        }
+    ]
 }

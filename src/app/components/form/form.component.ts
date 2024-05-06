@@ -40,6 +40,7 @@ export class FormComponent {
     genero: ['', Validators.required],
     cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     logradouro: ['', Validators.required],
+    numero: ['', Validators.required],
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
     complemento: [''],
@@ -75,6 +76,7 @@ export class FormComponent {
 
     if (this.form.valid) {
       console.log('formulário válido')
+      console.log(this.form.value);
     } else {
       Object.keys(this.form.controls).forEach(campo => {
         const controle = this.form.get(campo);
