@@ -12,6 +12,10 @@ export class PessoaService {
 
   constructor(private http: HttpClient) { }
 
+  buscar(){
+    return this.http.get<Pessoa[]>(this.url);
+  }
+
   cadastrar(pessoa: Pessoa){
     return this.http.post<Pessoa>(this.url, pessoa);
   }

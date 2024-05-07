@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
@@ -30,6 +30,8 @@ import { Pessoa } from '../../interface/pessoa.interface';
 export class FormComponent {
 
   estados$ = new Observable<EstadoBr[]>();
+
+  @Output() cadastrouPessoa = new EventEmitter();
 
   private formBuilderService = inject(FormBuilder);
   private dropDownService = inject(DropdownService);
@@ -80,8 +82,8 @@ export class FormComponent {
     if (this.form.valid) {
       const pessoa = this.form.value as Pessoa;
       this.pessoaService.cadastrar(pessoa).subscribe(p => {
-        console.log(p);
         this.form.reset();
+        this.cadastrouPessoa.emit(true);
       })
     } else {
       Object.keys(this.form.controls).forEach(campo => {

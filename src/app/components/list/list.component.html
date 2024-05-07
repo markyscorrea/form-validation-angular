@@ -2,4 +2,26 @@
     <div class="h4 pb-2 mb-4 border-bottom border-secondary">
         Pessoas Cadastradas
     </div>
+
+    <div class="row g-3">
+        <div class="d-flex justify-content-start">
+            <h6>Listagem:</h6>
+        </div>
+        <table class="table text-start">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (pessoa of pessoas$ | async; track $index) {
+                <tr>
+                    <td>{{ pessoa.nome + ' ' + pessoa.sobrenome }}</td>
+                    <td>Visualizar/Editar/Excluir</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

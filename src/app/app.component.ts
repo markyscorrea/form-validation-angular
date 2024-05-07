@@ -16,4 +16,11 @@ import { ListComponent } from './components/list/list.component';
 })
 export class AppComponent {
   title = 'form-validation';
+
+  eventoRecebido: boolean = false;
+
+  receberEvento(e: boolean){
+    this.eventoRecebido = e;
+  }
+
 }

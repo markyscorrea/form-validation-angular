@@ -7,10 +7,10 @@
     </div> -->
     <div class="row col-12">
       <div class="col-6 shadow-sm p-3">
-        <app-form></app-form>
+        <app-form (cadastrouPessoa)="receberEvento($event)"></app-form>
       </div>
       <div class="col-6 shadow-sm p-3">
-        <app-list></app-list>
+        <app-list [eventoCadastro]="eventoRecebido"></app-list>
       </div>
     </div>
   </div>
