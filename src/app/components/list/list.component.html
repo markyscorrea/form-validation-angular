@@ -4,24 +4,52 @@
     </div>
 
     <div class="row g-3">
-        <div class="d-flex justify-content-start">
-            <h6>Listagem:</h6>
-        </div>
-        <table class="table text-start">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (pessoa of pessoas$ | async; track $index) {
-                <tr>
-                    <td>{{ pessoa.nome + ' ' + pessoa.sobrenome }}</td>
-                    <td>Visualizar/Editar/Excluir</td>
-                </tr>
-                }
-            </tbody>
-        </table>
+        
+        @if (pessoas.length > 0) {
+            <div class="d-flex justify-content-start">
+                <h6>Listagem:</h6>
+            </div>
+            <table class="table table table-hover table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (pessoa of pessoas; track $index) {
+                    <tr>
+                        <td>{{ pessoa.nome + ' ' + pessoa.sobrenome }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm me-1 animate__animated"
+                            (mouseenter)="ativarAnimacao('visualizar')"
+                            (mouseleave)="desativarAnimacao('visualizar')"
+                            [class.animate__heartBeat]="animacaoAtivaVisualizar"
+                            data-bs-toggle="tooltip" [ngbTooltip]="'Visualizar'">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning text-white btn-sm me-1 animate__animated"
+                            (mouseenter)="ativarAnimacao('editar')"
+                            (mouseleave)="desativarAnimacao('editar')"
+                            [class.animate__bounce]="animacaoAtivaEditar"
+                            data-bs-toggle="tooltip" [ngbTooltip]="'Editar'">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button (click)="removerPessoa(pessoa.id!)" type="button" class="btn btn-danger btn-sm animate__animated"
+                            (mouseenter)="ativarAnimacao('excluir')"
+                            (mouseleave)="desativarAnimacao('excluir')"
+                            [class.animate__headShake]="animacaoAtivaExcluir"
+                            data-bs-toggle="tooltip" [ngbTooltip]="'Excluir'">
+                                <i class="bi bi-trash"></i>
+                            </button>
+    
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        } @else {
+            <app-img-vazio></app-img-vazio>
+        }
     </div>
 </div>

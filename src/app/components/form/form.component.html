@@ -50,7 +50,7 @@
             <div class="input-group mb-3">
                 <input appApenasNumeros (keydown)="onKeyDown($event)" placeholder="CEP" formControlName="cep"
                     type="text" class="form-control">
-                <button (click)="buscarCep()" class="btn btn-outline-primary " type="button" id="button-addon2">
+                <button (click)="buscarCep()" class="btn btn-outline-secondary " type="button" id="button-addon2">
                     <!-- Ícone de lupa (Bootstrap Icons) -->
                     <i class="bi bi-search" data-bs-toggle="tooltip" [ngbTooltip]="'Pesquisar'"></i>
                 </button>
@@ -105,7 +105,7 @@
         </div>
 
         <div class="col-12">
-            <button (click)="validarCampos()" class="btn btn-primary w-100" type="submit">Cadastrar</button>
+            <button (click)="validarCampos()" class="btn btn-success w-100" type="submit">Cadastrar</button>
         </div>
     </form>
 </div>

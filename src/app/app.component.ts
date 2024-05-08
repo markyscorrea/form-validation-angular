@@ -20,7 +20,7 @@ export class AppComponent {
   eventoRecebido: boolean = false;
 
   receberEvento(e: boolean){
-    this.eventoRecebido = e;
+    this.eventoRecebido = !this.eventoRecebido;
   }
 
 }

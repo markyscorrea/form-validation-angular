@@ -1,32 +1,3 @@
 {
-  "pessoas": [
-    {
-      "nome": "Márkys",
-      "sobrenome": "Corrêa",
-      "email": "markyscorrea@gmail.com",
-      "genero": "masculino",
-      "cep": "72915710",
-      "logradouro": "Alameda Varsóvia",
-      "numero": "51",
-      "bairro": "Mansões Centro Oeste",
-      "cidade": "Águas Lindas de Goiás",
-      "complemento": "Condomínio Porto Nobre XVIII",
-      "uf": "GO",
-      "id": "1"
-    },
-    {
-      "id": "53ec",
-      "nome": "Fabiana",
-      "sobrenome": "Oliveira",
-      "email": "email@email.com",
-      "genero": "masculino",
-      "cep": "72915710",
-      "logradouro": "Alameda Varsóvia",
-      "numero": "20",
-      "bairro": "Mansões Centro Oeste",
-      "cidade": "Águas Lindas de Goiás",
-      "complemento": "",
-      "uf": "GO"
-    }
-  ]
+  "pessoas": []
 }

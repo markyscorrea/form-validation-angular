@@ -19,4 +19,8 @@ export class PessoaService {
   cadastrar(pessoa: Pessoa){
     return this.http.post<Pessoa>(this.url, pessoa);
   }
+
+  deletar(id: string | number){
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }
