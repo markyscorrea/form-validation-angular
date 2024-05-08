@@ -3,7 +3,7 @@ import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
 
 @Component({
@@ -20,6 +20,8 @@ import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
 export class ListComponent {
 
   private pessoaService = inject(PessoaService);
+  private modalService = inject(NgbModal);
+  private idPessoa: string | number;
 
   //pessoas$ = new Observable<Pessoa[]>();
 
@@ -44,7 +46,14 @@ export class ListComponent {
     this.pessoaService.buscar().subscribe(p => this.pessoas = p);
   }
 
-  removerPessoa(id: string | number){
-    this.pessoaService.deletar(id).subscribe(_ => this.buscarPessoas());
+  setarIdPessoa(id: string | number){
+    this.idPessoa = id;
+  }
+
+  removerPessoa(){
+    this.pessoaService.deletar(this.idPessoa).subscribe(_ => {
+      this.modalService.dismissAll();
+      this.buscarPessoas();
+    });
   }
 }
