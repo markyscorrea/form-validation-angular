@@ -1,11 +1,9 @@
-import { Component, Input, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
-import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
-
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -20,7 +18,6 @@ import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
 export class ListComponent {
 
   private pessoaService = inject(PessoaService);
-  private modalService = inject(NgbModal);
   private idPessoa: string | number;
 
   //pessoas$ = new Observable<Pessoa[]>();
@@ -52,7 +49,6 @@ export class ListComponent {
 
   removerPessoa(){
     this.pessoaService.deletar(this.idPessoa).subscribe(_ => {
-      this.modalService.dismissAll();
       this.buscarPessoas();
     });
   }
