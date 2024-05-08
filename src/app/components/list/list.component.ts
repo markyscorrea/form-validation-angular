@@ -24,9 +24,6 @@ export class ListComponent {
   //pessoas$ = new Observable<Pessoa[]>();
 
   pessoas: Pessoa[] = [];
-  animacaoAtivaVisualizar: boolean = false;
-  animacaoAtivaEditar: boolean = false;
-  animacaoAtivaExcluir: boolean = false;
 
   @Input() eventoCadastro: boolean = false;
 
@@ -49,25 +46,5 @@ export class ListComponent {
 
   removerPessoa(id: string | number){
     this.pessoaService.deletar(id).subscribe(_ => this.buscarPessoas());
-  }
-
-  ativarAnimacao(btn: string) {
-    if(btn === 'visualizar'){
-      this.animacaoAtivaVisualizar = true;
-    } else if(btn === 'editar'){
-      this.animacaoAtivaEditar = true;
-    } else if(btn === 'excluir'){
-      this.animacaoAtivaExcluir = true;
-    }
-  }
-
-  desativarAnimacao(btn: string) {
-    if(btn === 'visualizar'){
-      this.animacaoAtivaVisualizar = false;
-    } else if(btn === 'editar'){
-      this.animacaoAtivaEditar = false;
-    } else if(btn === 'excluir'){
-      this.animacaoAtivaExcluir = false;
-    }
   }
 }
