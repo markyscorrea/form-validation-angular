@@ -41,8 +41,7 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button (click)="setarIdPessoa(pessoa.id!)" class="btn btn-sm dropdown-item"
-                                        data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">
+                                    <button (click)="abrirModal(pessoa.id!)" class="btn btn-sm dropdown-item">
                                         <i class="bi bi-trash"></i>
                                         Excluir
                                     </button>
@@ -57,21 +56,5 @@
         } @else {
         <app-img-vazio></app-img-vazio>
         }
-        <!-- Modal -->
-        <div class="modal fade modal-sm" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header d-flex justify-content-center">
-                        <h6>Confirmar Exclusão</h6>
-                    </div>
-                    <div class="modal-body d-flex justify-content-around">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                        <button (click)="removerPessoa()" type="button" class="btn btn-danger btn-sm"
-                            data-bs-dismiss="modal">Excluir</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

@@ -1,16 +1,18 @@
-import { Component, Input, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
 import { AsyncPipe } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
+import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [
     AsyncPipe,
     NgbModule,
-    ImgVazioComponent
+    ImgVazioComponent,
+    ModalConfirmComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
@@ -18,7 +20,8 @@ import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
 export class ListComponent {
 
   private pessoaService = inject(PessoaService);
-  private idPessoa: string | number;
+  private modalService = inject(NgbModal);
+  private modalRef: NgbModalRef;
 
   //pessoas$ = new Observable<Pessoa[]>();
 
@@ -43,13 +46,20 @@ export class ListComponent {
     this.pessoaService.buscar().subscribe(p => this.pessoas = p);
   }
 
-  setarIdPessoa(id: string | number){
-    this.idPessoa = id;
-  }
-
-  removerPessoa(){
-    this.pessoaService.deletar(this.idPessoa).subscribe(_ => {
+  removerPessoa(id: string | number){
+    this.pessoaService.deletar(id).subscribe(_ => {
       this.buscarPessoas();
     });
+  }
+
+  abrirModal(id: string | number){
+    this.modalRef = this.modalService.open(ModalConfirmComponent, {
+      size: 'sm',
+      centered: true
+    });
+    
+    this.modalRef.componentInstance.modalClosed.subscribe(() => {
+      this.removerPessoa(id);
+    })
   }
 }
