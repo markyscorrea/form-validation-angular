@@ -11,4 +11,5 @@ export interface Pessoa {
     cidade: string;
     complemento: string;
     uf: string;
+    ativo: boolean
 }

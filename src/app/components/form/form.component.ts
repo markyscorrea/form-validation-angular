@@ -37,6 +37,7 @@ export class FormComponent {
   private dropDownService = inject(DropdownService);
   private consultaCep = inject(ConsultaCepService);
   private pessoaService = inject(PessoaService);
+  public pessoaTemId: boolean = false;
 
   protected form = this.formBuilderService.group({
     nome: ['', Validators.required],
@@ -49,7 +50,8 @@ export class FormComponent {
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
     complemento: [''],
-    uf: ['', [Validators.required]]
+    uf: ['', [Validators.required]],
+    ativo: [true, Validators.required]
   })
 
   ngOnInit() {
@@ -81,8 +83,9 @@ export class FormComponent {
 
     if (this.form.valid) {
       const pessoa = this.form.value as Pessoa;
-      this.pessoaService.cadastrar(pessoa).subscribe(p => {
+      this.pessoaService.cadastrar(pessoa).subscribe(_ => {
         this.form.reset();
+        this.form.controls.ativo.setValue(true);
         this.cadastrouPessoa.emit(true);
       })
     } else {

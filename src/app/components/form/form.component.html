@@ -4,8 +4,14 @@
     </div>
 
     <form [formGroup]="form" class="row g-3">
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-start justify-content-between">
             <h6>Dados Pessoais:</h6>
+            @if (pessoaTemId) {
+                <div class="form-check form-switch">
+                    <input class="form-check-input form-control" type="checkbox" role="switch" formControlName="ativo">
+                    {{ form.controls.ativo ? 'Ativo' : 'Inativo' }}
+                </div>
+            }
         </div>
         <!-- NOME -->
         <div class="col-md-6">

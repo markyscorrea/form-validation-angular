@@ -23,7 +23,9 @@
                     <td>{{ pessoa.nome + ' ' + pessoa.sobrenome }}</td>
 
                     <td>
-                        <span class="badge rounded-pill text-bg-success">Ativo</span>
+                        <span class="badge rounded-pill" [class.text-bg-success]="pessoa.ativo" [class.text-bg-secondary]="!pessoa.ativo">
+                            {{ pessoa.ativo ? 'ativo' : 'inativo' }}
+                        </span>
                     </td>
 
                     <td>
