@@ -6,7 +6,7 @@
     <form [formGroup]="form" class="row g-3">
         <div class="d-flex justify-content-start justify-content-between">
             <h6>Dados Pessoais:</h6>
-            @if (pessoaTemId) {
+            @if (telaEdicao) {
                 <div class="form-check form-switch">
                     <input class="form-check-input form-control" type="checkbox" role="switch" formControlName="ativo">
                     {{ form.controls.ativo ? 'Ativo' : 'Inativo' }}
@@ -111,7 +111,9 @@
         </div>
 
         <div class="col-12">
-            <button (click)="validarCampos()" class="btn btn-success w-100" type="submit">Cadastrar</button>
+            <button (click)="validarCampos()" class="btn btn-success w-100" type="submit">
+                {{ telaEdicao ? 'Salvar' : 'Cadastrar' }}
+            </button>
         </div>
     </form>
 </div>

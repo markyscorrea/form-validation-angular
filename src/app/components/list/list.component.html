@@ -2,9 +2,7 @@
     <div class="h4 pb-2 mb-4 border-bottom border-secondary">
         Pessoas Cadastradas
     </div>
-
     <div class="row g-3">
-
         @if (pessoas.length > 0) {
         <div class="d-flex justify-content-start">
             <h6>Listagem:</h6>
@@ -37,7 +35,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <button class="btn btn-sm dropdown-item">
+                                    <button (click)="visualizarPessoa(pessoa)" class="btn btn-sm dropdown-item">
                                         <i class="bi bi-search"></i>
                                         Visualizar
                                     </button>

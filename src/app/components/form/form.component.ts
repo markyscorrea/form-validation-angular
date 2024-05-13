@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
@@ -31,13 +31,14 @@ export class FormComponent {
 
   estados$ = new Observable<EstadoBr[]>();
 
+  @Input() eventoVisualizacao: Pessoa;
   @Output() cadastrouPessoa = new EventEmitter();
 
   private formBuilderService = inject(FormBuilder);
   private dropDownService = inject(DropdownService);
   private consultaCep = inject(ConsultaCepService);
   private pessoaService = inject(PessoaService);
-  public pessoaTemId: boolean = false;
+  public telaEdicao: boolean = false;
 
   protected form = this.formBuilderService.group({
     nome: ['', Validators.required],
@@ -56,6 +57,27 @@ export class FormComponent {
 
   ngOnInit() {
     this.estados$ = this.dropDownService.getEstados();
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(changes['eventoVisualizacao']){
+      // this.form.setValue({
+      //   nome: this.eventoVisualizacao?.nome || '',
+      //   sobrenome: this.eventoVisualizacao?.sobrenome || '',
+      //   email: this.eventoVisualizacao?.email || '',
+      //   genero: this.eventoVisualizacao?.genero || '',
+      //   cep: this.eventoVisualizacao?.cep || '',
+      //   logradouro: this.eventoVisualizacao?.logradouro || '',
+      //   numero: this.eventoVisualizacao?.numero || '',
+      //   bairro: this.eventoVisualizacao?.bairro || '',
+      //   cidade: this.eventoVisualizacao?.cidade || '',
+      //   complemento: this.eventoVisualizacao?.complemento || '',
+      //   uf: this.eventoVisualizacao?.uf || '',
+      //   ativo: this.eventoVisualizacao?.ativo || true
+      // });
+      this.form.patchValue(this.eventoVisualizacao);
+      this.telaEdicao = this.eventoVisualizacao?.ativo;
+    }
   }
 
   onKeyDown(event: KeyboardEvent) {

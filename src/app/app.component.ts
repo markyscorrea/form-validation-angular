@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
 import { ListComponent } from './components/list/list.component';
+import { Pessoa } from './interface/pessoa.interface';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,14 @@ import { ListComponent } from './components/list/list.component';
 export class AppComponent {
   title = 'form-validation';
 
-  eventoRecebido: boolean = false;
+  eventoRecebidoCadastro: boolean = false;
+  eventoRecebidoVisualizacao: Pessoa;
 
-  receberEvento(e: boolean){
-    this.eventoRecebido = !this.eventoRecebido;
+  receberEventoCadastro(e: boolean){
+    this.eventoRecebidoCadastro = !this.eventoRecebidoCadastro;
   }
 
+  receberEventoVisualizacao(p: Pessoa){
+    this.eventoRecebidoVisualizacao = p;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
 import { AsyncPipe } from '@angular/common';
@@ -28,6 +28,7 @@ export class ListComponent {
   pessoas: Pessoa[] = [];
 
   @Input() eventoCadastro: boolean = false;
+  @Output() visualizarCadastroPessoa = new EventEmitter();
 
   ngOnInit(){
     this.buscarPessoas();
@@ -44,6 +45,10 @@ export class ListComponent {
     //this.pessoas$ = this.pessoaService.buscar();
 
     this.pessoaService.buscar().subscribe(p => this.pessoas = p);
+  }
+
+  visualizarPessoa(pessoa: Pessoa){
+    this.visualizarCadastroPessoa.emit(pessoa);
   }
 
   removerPessoa(id: string | number){
