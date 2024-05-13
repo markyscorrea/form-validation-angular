@@ -12,6 +12,7 @@ import { ConsultaCepService } from '../../servicos/consulta-cep.service';
 import { Endereco } from '../../interface/endereco.interface';
 import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
+import { PessoaEdicao } from '../../interface/edicao.interface';
 
 @Component({
   selector: 'app-form',
@@ -31,7 +32,7 @@ export class FormComponent {
 
   estados$ = new Observable<EstadoBr[]>();
 
-  @Input() eventoVisualizacao: Pessoa;
+  @Input() eventoVisualizacao: PessoaEdicao;
   @Output() cadastrouPessoa = new EventEmitter();
 
   private formBuilderService = inject(FormBuilder);
@@ -39,9 +40,9 @@ export class FormComponent {
   private consultaCep = inject(ConsultaCepService);
   private pessoaService = inject(PessoaService);
   public telaEdicao: boolean = false;
+  public idPessoaEdicao: number | string;
 
   protected form = this.formBuilderService.group({
-    id: '',
     nome: ['', Validators.required],
     sobrenome: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -62,22 +63,9 @@ export class FormComponent {
 
   ngOnChanges(changes: SimpleChanges){
     if(changes['eventoVisualizacao']){
-      // this.form.setValue({
-      //   nome: this.eventoVisualizacao?.nome || '',
-      //   sobrenome: this.eventoVisualizacao?.sobrenome || '',
-      //   email: this.eventoVisualizacao?.email || '',
-      //   genero: this.eventoVisualizacao?.genero || '',
-      //   cep: this.eventoVisualizacao?.cep || '',
-      //   logradouro: this.eventoVisualizacao?.logradouro || '',
-      //   numero: this.eventoVisualizacao?.numero || '',
-      //   bairro: this.eventoVisualizacao?.bairro || '',
-      //   cidade: this.eventoVisualizacao?.cidade || '',
-      //   complemento: this.eventoVisualizacao?.complemento || '',
-      //   uf: this.eventoVisualizacao?.uf || '',
-      //   ativo: this.eventoVisualizacao?.ativo || true
-      // });
-      this.form.patchValue(this.eventoVisualizacao);
-      this.telaEdicao = this.eventoVisualizacao?.ativo;
+      this.form.patchValue(this.eventoVisualizacao?.pessoa);
+      this.idPessoaEdicao = this.eventoVisualizacao?.pessoa.id!;
+      this.telaEdicao = this.eventoVisualizacao?.pessoa.ativo;
     }
   }
 
@@ -127,10 +115,11 @@ export class FormComponent {
 
   editarPessoa(){
     const pessoa = this.form.value as Pessoa;
-    this.pessoaService.editar(pessoa).subscribe(_ => {
+    this.pessoaService.editar(pessoa, this.idPessoaEdicao).subscribe(_ => {
       this.form.reset();
       this.form.controls.ativo.setValue(true);
       this.cadastrouPessoa.emit(true);
+      this.telaEdicao = !this.telaEdicao;
     })
   }
 
@@ -138,5 +127,7 @@ export class FormComponent {
     this.form.reset();
     this.form.controls.ativo.setValue(true);
     this.telaEdicao = false;
+    this.idPessoaEdicao = '';
+    if(this.telaEdicao) this.eventoVisualizacao.status = false;
   }
 }

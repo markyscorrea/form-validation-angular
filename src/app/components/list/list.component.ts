@@ -48,7 +48,7 @@ export class ListComponent {
   }
 
   visualizarPessoa(pessoa: Pessoa){
-    this.visualizarCadastroPessoa.emit(pessoa);
+    this.visualizarCadastroPessoa.emit({pessoa: pessoa, status: true});
   }
 
   removerPessoa(id: string | number){

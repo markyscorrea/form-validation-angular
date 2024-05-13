@@ -20,8 +20,8 @@ export class PessoaService {
     return this.http.post<Pessoa>(this.url, pessoa);
   }
 
-  editar(pessoa: Pessoa){
-    return this.http.put<Pessoa>(`${this.url}/${pessoa.id}`, pessoa);
+  editar(pessoa: Pessoa, id: string | number){
+    return this.http.put<Pessoa>(`${this.url}/${id}`, pessoa);
   }
 
   deletar(id: string | number){
