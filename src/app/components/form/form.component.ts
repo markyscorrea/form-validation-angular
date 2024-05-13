@@ -41,6 +41,7 @@ export class FormComponent {
   public telaEdicao: boolean = false;
 
   protected form = this.formBuilderService.group({
+    id: '',
     nome: ['', Validators.required],
     sobrenome: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -103,18 +104,39 @@ export class FormComponent {
 
   validarCampos() {
 
-    if (this.form.valid) {
-      const pessoa = this.form.value as Pessoa;
-      this.pessoaService.cadastrar(pessoa).subscribe(_ => {
-        this.form.reset();
-        this.form.controls.ativo.setValue(true);
-        this.cadastrouPessoa.emit(true);
-      })
+    if (this.form.valid && !this.telaEdicao) {
+      this.cadastrarPessoa();
+    } else if (this.form.valid && this.telaEdicao) {
+      this.editarPessoa();
     } else {
       Object.keys(this.form.controls).forEach(campo => {
         const controle = this.form.get(campo);
         controle?.markAsTouched();
       })
     }
+  }
+
+  cadastrarPessoa(){
+    const pessoa = this.form.value as Pessoa;
+    this.pessoaService.cadastrar(pessoa).subscribe(_ => {
+      this.form.reset();
+      this.form.controls.ativo.setValue(true);
+      this.cadastrouPessoa.emit(true);
+    })
+  }
+
+  editarPessoa(){
+    const pessoa = this.form.value as Pessoa;
+    this.pessoaService.editar(pessoa).subscribe(_ => {
+      this.form.reset();
+      this.form.controls.ativo.setValue(true);
+      this.cadastrouPessoa.emit(true);
+    })
+  }
+
+  limparForm(){
+    this.form.reset();
+    this.form.controls.ativo.setValue(true);
+    this.telaEdicao = false;
   }
 }

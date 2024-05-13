@@ -20,6 +20,10 @@ export class PessoaService {
     return this.http.post<Pessoa>(this.url, pessoa);
   }
 
+  editar(pessoa: Pessoa){
+    return this.http.put<Pessoa>(`${this.url}/${pessoa.id}`, pessoa);
+  }
+
   deletar(id: string | number){
     return this.http.delete(`${this.url}/${id}`);
   }

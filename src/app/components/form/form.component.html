@@ -110,9 +110,14 @@
             }
         </div>
 
-        <div class="col-12">
+        <div class="col-10">
             <button (click)="validarCampos()" class="btn btn-success w-100" type="submit">
                 {{ telaEdicao ? 'Salvar' : 'Cadastrar' }}
+            </button>
+        </div>
+        <div class="col-2">
+            <button (click)="limparForm()" class="btn btn-outline-secondary">
+                Limpar
             </button>
         </div>
     </form>
