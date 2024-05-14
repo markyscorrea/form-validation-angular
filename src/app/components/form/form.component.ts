@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
 import { MsgValidationComponent } from '../msg-validation/msg-validation.component';
 import { ApenasNumerosDirective } from '../../diretivas/apenas-numeros.directive';
@@ -13,6 +13,7 @@ import { Endereco } from '../../interface/endereco.interface';
 import { PessoaService } from '../../servicos/pessoa.service';
 import { Pessoa } from '../../interface/pessoa.interface';
 import { PessoaEdicao } from '../../interface/edicao.interface';
+import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-form',
@@ -42,6 +43,9 @@ export class FormComponent {
   public telaEdicao: boolean = false;
   public idPessoaEdicao: number | string;
 
+  private modalService = inject(NgbModal);
+  private modalRef: NgbModalRef;
+
   protected form = this.formBuilderService.group({
     nome: ['', Validators.required],
     sobrenome: ['', Validators.required],
@@ -61,11 +65,11 @@ export class FormComponent {
     this.estados$ = this.dropDownService.getEstados();
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if(changes['eventoVisualizacao']){
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['eventoVisualizacao']) {
       this.form.patchValue(this.eventoVisualizacao?.pessoa);
       this.idPessoaEdicao = this.eventoVisualizacao?.pessoa.id!;
-      this.telaEdicao = this.eventoVisualizacao?.pessoa.ativo;
+      this.telaEdicao = true;
     }
   }
 
@@ -84,7 +88,7 @@ export class FormComponent {
         this.form.patchValue({
           logradouro: cep.logradouro,
           bairro: cep.bairro,
-          cidade: cep. localidade,
+          cidade: cep.localidade,
           uf: cep.uf
         })
       });
@@ -104,7 +108,7 @@ export class FormComponent {
     }
   }
 
-  cadastrarPessoa(){
+  cadastrarPessoa() {
     const pessoa = this.form.value as Pessoa;
     this.pessoaService.cadastrar(pessoa).subscribe(_ => {
       this.form.reset();
@@ -113,21 +117,35 @@ export class FormComponent {
     })
   }
 
-  editarPessoa(){
-    const pessoa = this.form.value as Pessoa;
-    this.pessoaService.editar(pessoa, this.idPessoaEdicao).subscribe(_ => {
-      this.form.reset();
-      this.form.controls.ativo.setValue(true);
-      this.cadastrouPessoa.emit(true);
-      this.telaEdicao = !this.telaEdicao;
-    })
+  editarPessoa() {
+    this.abrirModal();
   }
 
-  limparForm(){
+  limparForm() {
     this.form.reset();
     this.form.controls.ativo.setValue(true);
     this.telaEdicao = false;
     this.idPessoaEdicao = '';
-    if(this.telaEdicao) this.eventoVisualizacao.status = false;
+    if (this.telaEdicao) this.eventoVisualizacao.status = false;
+  }
+
+  abrirModal() {
+    this.modalRef = this.modalService.open(ModalConfirmComponent, {
+      size: 'sm',
+      centered: true
+    });
+
+    this.modalRef.componentInstance.tituloModal = 'Confirmar Edição';
+    this.modalRef.componentInstance.descricaoBtn = 'Editar';
+    this.modalRef.componentInstance.corBtn = 'success';
+    this.modalRef.componentInstance.modalClosed.subscribe(() => {
+      const pessoa = this.form.value as Pessoa;
+      this.pessoaService.editar(pessoa, this.idPessoaEdicao).subscribe(_ => {
+        this.form.reset();
+        this.form.controls.ativo.setValue(true);
+        this.cadastrouPessoa.emit(true);
+        this.telaEdicao = !this.telaEdicao;
+      })
+    })
   }
 }

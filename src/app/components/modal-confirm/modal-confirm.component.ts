@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,13 +12,16 @@ export class ModalConfirmComponent {
 
   public activeModal = inject(NgbActiveModal);
 
+  @Input() tituloModal: string;
+  @Input() descricaoBtn: string;
+  @Input() corBtn: string;
   @Output() modalClosed = new EventEmitter();
 
   fecharModal(){
     this.activeModal.dismiss();
   }
 
-  confirmarExclusao(){
+  confirmar(){
     this.activeModal.dismiss();
     this.modalClosed.emit();
   }

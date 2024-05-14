@@ -63,6 +63,9 @@ export class ListComponent {
       centered: true
     });
     
+    this.modalRef.componentInstance.tituloModal = 'Confirmar Exclusão';
+    this.modalRef.componentInstance.descricaoBtn = 'Excluir';
+    this.modalRef.componentInstance.corBtn = 'danger';
     this.modalRef.componentInstance.modalClosed.subscribe(() => {
       this.removerPessoa(id);
     })
