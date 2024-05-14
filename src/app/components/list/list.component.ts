@@ -5,6 +5,7 @@ import { AsyncPipe } from '@angular/common';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ImgVazioComponent } from '../img-vazio/img-vazio.component';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
+import { PessoaEdicao } from '../../interface/edicao.interface';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -47,8 +48,9 @@ export class ListComponent {
     this.pessoaService.buscar().subscribe(p => this.pessoas = p);
   }
 
-  visualizarPessoa(pessoa: Pessoa){
-    this.visualizarCadastroPessoa.emit({pessoa: pessoa, status: true});
+  visualizarPessoa(p: Pessoa){
+    let pessoaEdit: PessoaEdicao = {pessoa: p, status: true};
+    this.visualizarCadastroPessoa.emit(pessoaEdit);
   }
 
   removerPessoa(id: string | number){

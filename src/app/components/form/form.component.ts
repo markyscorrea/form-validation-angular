@@ -66,7 +66,7 @@ export class FormComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['eventoVisualizacao']) {
+    if (changes['eventoVisualizacao'] && changes['eventoVisualizacao'].currentValue) {
       this.form.patchValue(this.eventoVisualizacao?.pessoa);
       this.idPessoaEdicao = this.eventoVisualizacao?.pessoa.id!;
       this.telaEdicao = true;
@@ -144,7 +144,7 @@ export class FormComponent {
         this.form.reset();
         this.form.controls.ativo.setValue(true);
         this.cadastrouPessoa.emit(true);
-        this.telaEdicao = !this.telaEdicao;
+        this.telaEdicao = false;
       })
     })
   }
