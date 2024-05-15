@@ -27,6 +27,7 @@ export class ListComponent {
   //pessoas$ = new Observable<Pessoa[]>();
 
   pessoas: Pessoa[] = [];
+  pessoaEdit: PessoaEdicao = { pessoa: this.pessoas[0], status: false }
 
   @Input() eventoCadastro: boolean = false;
   @Output() visualizarCadastroPessoa = new EventEmitter();
@@ -39,6 +40,7 @@ export class ListComponent {
     if(changes['eventoCadastro']){
       this.buscarPessoas();
       this.eventoCadastro = false;
+      this.pessoaEdit.status = false;
     }
   }
 
@@ -49,8 +51,8 @@ export class ListComponent {
   }
 
   visualizarPessoa(p: Pessoa){
-    let pessoaEdit: PessoaEdicao = {pessoa: p, status: true};
-    this.visualizarCadastroPessoa.emit(pessoaEdit);
+    this.pessoaEdit = {pessoa: p, status: true};
+    this.visualizarCadastroPessoa.emit(this.pessoaEdit);
   }
 
   removerPessoa(id: string | number){

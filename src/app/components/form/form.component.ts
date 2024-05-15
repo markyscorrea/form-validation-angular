@@ -126,7 +126,8 @@ export class FormComponent {
     this.form.controls.ativo.setValue(true);
     this.telaEdicao = false;
     this.idPessoaEdicao = '';
-    if (this.telaEdicao) this.eventoVisualizacao.status = false;
+    this.eventoVisualizacao.status = false;
+    //if (this.telaEdicao) this.eventoVisualizacao.status = false;
   }
 
   abrirModal() {

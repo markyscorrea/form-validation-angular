@@ -41,7 +41,7 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button (click)="abrirModal(pessoa.id!)" class="btn btn-sm dropdown-item">
+                                    <button [disabled]="pessoaEdit.status" (click)="abrirModal(pessoa.id!)" class="btn btn-sm dropdown-item">
                                         <i class="bi bi-trash"></i>
                                         Excluir
                                     </button>
