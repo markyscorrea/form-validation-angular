@@ -1,34 +1,3 @@
 {
-  "pessoas": [
-    {
-      "nome": "Fabiana",
-      "sobrenome": "Oliveira",
-      "email": "fabi@gmail.com",
-      "genero": "masculino",
-      "cep": "72915710",
-      "logradouro": "Alameda Varsóvia",
-      "numero": "51",
-      "bairro": "Mansões Centro Oeste",
-      "cidade": "Águas Lindas de Goiás",
-      "complemento": null,
-      "uf": "GO",
-      "ativo": true,
-      "id": "3a8a"
-    },
-    {
-      "nome": "Márkys",
-      "sobrenome": "Corrêa",
-      "email": "emaildomarkys@gmail.com",
-      "genero": "masculino",
-      "cep": "72710564",
-      "logradouro": "Quadra 6 Bloco D Comércio",
-      "numero": "50",
-      "bairro": "Setor Norte (Brazlândia)",
-      "cidade": "Brasília",
-      "complemento": null,
-      "uf": "DF",
-      "ativo": false,
-      "id": "d6f7"
-    }
-  ]
+  "pessoas": []
 }

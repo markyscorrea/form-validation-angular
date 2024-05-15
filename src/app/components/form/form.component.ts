@@ -124,10 +124,10 @@ export class FormComponent {
   limparForm() {
     this.form.reset();
     this.form.controls.ativo.setValue(true);
+    if (this.telaEdicao) this.eventoVisualizacao.status = false;
     this.telaEdicao = false;
     this.idPessoaEdicao = '';
-    this.eventoVisualizacao.status = false;
-    //if (this.telaEdicao) this.eventoVisualizacao.status = false;
+    //this.eventoVisualizacao.status = false;
   }
 
   abrirModal() {
