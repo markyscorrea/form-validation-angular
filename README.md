@@ -1,27 +1,41 @@
-# FormValidation
+# CRUD de Pessoas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+Teaser:
 
-## Development server
+<img src="./src/assets/apresentacao.gif">
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sobre
 
-## Code scaffolding
+Aplicação utiliza de formulários reativos para cadastrar pessoas.
+A listagem dinâminica permite visualização em tempo real das edições.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias Utilizadas
 
-## Build
+- Angular 17
+- Typescript
+- NodeJS
+- Bootstrap
+- Json-server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalação
 
-## Running unit tests
+**Instalar Angular CLI:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```shell
+$ npm install -g @angular/cli
+```
+**Instalar dependências:**
+```shell
+$ npm install
+```
+**Execução do projeto:**
+```shell
+$ npm start
+```
+## Observações
 
-## Running end-to-end tests
+- API e UI são executadas em paralelo no mesmo terminal, com o uso da ferramenta [Concurrently.](https://www.npmjs.com/package/concurrently)
+- Pode-se alterar o arquivo db.json para quais dados desejar, desde que mantenha a estrutura do objeto.
+- Aplicação criada em rotina de estudos do Angular, implementando novos recursos da versão 17.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Desenvolvido por Márkys Corrêa.
