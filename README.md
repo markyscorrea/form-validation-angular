@@ -7,7 +7,7 @@ Teaser:
 ## Sobre
 
 Aplicação utiliza de formulários reativos para cadastrar pessoas.
-A listagem dinâminica permite visualização em tempo real das edições.
+A listagem dinâmica permite visualização em tempo real das edições.
 
 ## Tecnologias Utilizadas
 
