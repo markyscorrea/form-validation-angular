@@ -6,10 +6,10 @@
       <h1 class="">Cadastro e Listagem de Pessoas</h1>
     </div>
     <div class="row col-12">
-      <div class="col-6 shadow-sm p-3">
+      <div class="col-md-6 col-12 shadow-sm p-3">
         <app-form (cadastrouPessoa)="receberEventoCadastro($event)" [eventoVisualizacao]="eventoRecebidoVisualizacao"></app-form>
       </div>
-      <div class="col-6 shadow-sm p-3">
+      <div class="col-md-6 col-12 shadow-sm p-3">
         <app-list (visualizarCadastroPessoa)="receberEventoVisualizacao($event)" [eventoCadastro]="eventoRecebidoCadastro"></app-list>
       </div>
     </div>
